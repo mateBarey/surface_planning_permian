@@ -1,6 +1,6 @@
 {
   "name": "fge-drill-planner",
-  "version": "4.1.0",
+  "version": "5.6.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -13,6 +13,6 @@
   },
   "devDependencies": {
     "vite": "^5.0.0",
-    "vite-plugin-cesium": "^1.2.22"
+    "vite-plugin-static-copy": "^1.0.0"
   }
 }
