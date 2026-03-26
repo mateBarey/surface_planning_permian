@@ -1,5 +1,10 @@
 import { defineConfig } from 'vite';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const cesiumBuild = path.join(__dirname, 'node_modules', 'cesium', 'Build', 'Cesium', 'Cesium.js');
 
 export default defineConfig({
   define: {
@@ -17,11 +22,10 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      // Point cesium imports at the PRE-BUILT bundle.
-      // This is a single file with everything compiled in — Vite never walks
-      // the 800+ source modules, so it never hits exportKml.js and its broken
-      // @zip.js/zip.js/lib/zip-no-worker.js import.
-      cesium: 'cesium/Build/Cesium/Cesium.js',
+      // Absolute path to the pre-built Cesium bundle.
+      // Must be an absolute path — NOT a package specifier — so Vite
+      // skips the exports map entirely and loads the file directly.
+      cesium: cesiumBuild,
     },
   },
   server: {
