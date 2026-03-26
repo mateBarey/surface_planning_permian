@@ -1,10 +1,5 @@
 import { defineConfig } from 'vite';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
-import { fileURLToPath } from 'url';
-import { createRequire } from 'module';
-
-// Use createRequire to resolve through pnpm's symlinked node_modules
-const require = createRequire(import.meta.url);
 
 export default defineConfig({
   define: {
@@ -20,14 +15,13 @@ export default defineConfig({
       ],
     }),
   ],
-  optimizeDeps: {
-    exclude: ['cesium', '@cesium/engine'],
-  },
   resolve: {
     alias: {
-      // Resolve through pnpm's .pnpm store to the actual file on disk,
-      // bypassing @zip.js/zip.js's broken package exports map.
-      '@zip.js/zip.js/lib/zip-no-worker.js': require.resolve('@zip.js/zip.js/lib/zip-no-worker.js'),
+      // Point cesium imports at the PRE-BUILT bundle.
+      // This is a single file with everything compiled in — Vite never walks
+      // the 800+ source modules, so it never hits exportKml.js and its broken
+      // @zip.js/zip.js/lib/zip-no-worker.js import.
+      cesium: 'cesium/Build/Cesium/Cesium.js',
     },
   },
   server: {
