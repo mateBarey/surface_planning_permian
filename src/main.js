@@ -1,6 +1,6 @@
 // FGE DRILL PLANNER - v5.6.0 - Modern 2026 Cesium Rendering
-// Note: cesium/Widgets/widgets.css is loaded via index.html (served by viteStaticCopy)
 import * as Cesium from 'cesium';
+import 'cesium/Build/Cesium/Widgets/widgets.css';
 import './style.css';
 import { createSidebar } from './ui.js';
 

@@ -13,6 +13,6 @@
   },
   "devDependencies": {
     "vite": "^5.0.0",
-    "vite-plugin-static-copy": "^1.0.0"
+    "vite-plugin-cesium": "^1.2.22"
   }
 }
