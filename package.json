@@ -12,7 +12,7 @@
     "three": "^0.160.0"
   },
   "devDependencies": {
-    "vite": "^5.0.0",
-    "vite-plugin-cesium": "^1.2.22"
+    "vite": "5.3.6",
+    "vite-plugin-cesium": "1.2.22"
   }
 }
