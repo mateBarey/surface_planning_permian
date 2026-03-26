@@ -1,5 +1,10 @@
 import { defineConfig } from 'vite';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
+import { fileURLToPath } from 'url';
+import { createRequire } from 'module';
+
+// Use createRequire to resolve through pnpm's symlinked node_modules
+const require = createRequire(import.meta.url);
 
 export default defineConfig({
   define: {
@@ -16,17 +21,13 @@ export default defineConfig({
     }),
   ],
   optimizeDeps: {
-    // Exclude cesium and all its split sub-packages from Vite pre-bundling.
-    // This prevents Vite from walking @cesium/engine's deps and hitting the
-    // broken @zip.js/zip.js exports map (missing ./lib/zip-no-worker.js).
     exclude: ['cesium', '@cesium/engine'],
   },
   resolve: {
-    // Bypass the broken @zip.js/zip.js package exports map by pointing the
-    // missing subpath directly at the actual file on disk.
     alias: {
-      '@zip.js/zip.js/lib/zip-no-worker.js':
-        'node_modules/@zip.js/zip.js/lib/zip-no-worker.js',
+      // Resolve through pnpm's .pnpm store to the actual file on disk,
+      // bypassing @zip.js/zip.js's broken package exports map.
+      '@zip.js/zip.js/lib/zip-no-worker.js': require.resolve('@zip.js/zip.js/lib/zip-no-worker.js'),
     },
   },
   server: {
