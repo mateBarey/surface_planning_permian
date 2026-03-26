@@ -174,13 +174,21 @@ Before making ANY code change, ask yourself:
 - Basic terrain rendering
 - 3 test pads displayed
 
-### **v5.0.0** (CURRENT)
+### **v5.0.0**
 - Optimized Cesium rendering (vertex normals, lighting)
 - Three.js post-processing (SSAO, bloom, FXAA)
 - Dark theme CSS
 - Modern header/footer UI
-- **KEPT:** async initialization (working pattern)
-- **ADDED:** terrain lighting, post-processing
+
+### **v5.6.0** (CURRENT)
+- Fixed Vite `allowedHosts: 'all'` (blocked preview)
+- Tile quality: maximumScreenSpaceError=1, tileCacheSize=2048, skipLOD settings
+- Atmosphere: DynamicAtmosphereLightingType.SUNLIGHT, subtle fog density=0.0002
+- HBAO: enabled with intensity=2.5, bias=0.1, lengthCap=0.3 (Dec 2024 algo)
+- FXAA: enabled; Tonemapper.PBR_NEUTRAL; exposure=1.1
+- Imagery: brightness=1.05, contrast=1.15, saturation=1.2 on base layer
+- **NO BLOOM** (bug #6847 - bloom+AO = artifacts)
+- **KEPT:** Asset ID 2, async init, v4.2.0 pad markers
 - **NEXT:** Port v2 UI (Phase 2)
 
 ---
