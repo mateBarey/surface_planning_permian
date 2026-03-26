@@ -12,9 +12,15 @@ const PADS = [
 ];
 
 async function init() {
+    console.log('[v0] init() starting');
     createSidebar();
+    console.log('[v0] sidebar created');
+
+    console.log('[v0] Cesium version:', Cesium.VERSION);
+    console.log('[v0] Ion token set:', !!import.meta.env.VITE_CESIUM_ION_TOKEN);
 
     const imageryProvider = await Cesium.IonImageryProvider.fromAssetId(2);
+    console.log('[v0] imagery provider created');
 
     const viewer = new Cesium.Viewer('cesiumContainer', {
         baseLayer: new Cesium.ImageryLayer(imageryProvider),
@@ -70,4 +76,4 @@ async function init() {
     });
 }
 
-init().catch(console.error);
+init().catch(err => console.error('[v0] INIT FAILED:', err));
